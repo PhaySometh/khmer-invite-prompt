@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Prompt សម្រាប់បង្កើតវេបសាយធៀបការឌីជីថល ស្ទីលខ្មែរ ជាមួយ Claude · by Someth Phay">
+<meta name="description" content="Prompt និងធនធានសម្រាប់បង្កើតវេបសាយធៀបការឌីជីថល ស្ទីលខ្មែរ ជាមួយ Claude · by Someth Phay">
 <meta property="og:title" content="ធៀបការឌីជីថល · Khmer E-Invitation Prompt">
-<meta property="og:description" content="ចម្លង Prompt បំពេញព័ត៌មាន ហើយបង្កើតធៀបការឌីជីថលផ្ទាល់ខ្លួនជាមួយ Claude · by Someth Phay">
+<meta property="og:description" content="ចម្លង Prompt ទាញយក Starter Kit ហើយបង្កើតធៀបការឌីជីថលផ្ទាល់ខ្លួនជាមួយ Claude · by Someth Phay">
 <meta property="og:image" content="https://raksmey-pheakdey.vercel.app/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1f2311">
+<link rel="icon" href="kit/ornaments/kbach-crest.svg" type="image/svg+xml">
 <title>Khmer E-Invitation Prompt</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Moul&family=Moulpali&family=Dangrek&family=Koulen&family=Battambang:wght@400;700&family=Fasthand&family=Preahvihear&family=Noto+Serif+Khmer:wght@400;600&family=Pinyon+Script&family=Kantumruy+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a single centred "card on a table" column — header like the front of a ធៀប, then steps, the prompt as the card's insert, credit as the back flap. */
 :root {
@@ -92,6 +93,40 @@ pre .h { color: var(--gold); font-weight: 500; }
 .fu-item span { font: 12.5px/1.6 var(--f-mono); color: var(--cream-dim); overflow-wrap: anywhere; }
 .fu-item::after { content: 'ចុចដើម្បីចម្លង'; font-size: .75rem; color: var(--gold); }
 .honest { padding: 14px 16px; border-left: 2px solid var(--gold); background: var(--olive); color: var(--cream-dim); font-size: .95rem; margin-top: 14px; }
+.h3 { font-family: var(--f-kh); font-weight: 600; font-size: 1.02rem; color: var(--cream); margin: 22px 0 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.h3 small { font-weight: 400; color: var(--cream-dim); font-size: .82rem; }
+.check { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px; }
+.check li { position: relative; padding: 10px 12px 10px 38px; background: var(--olive); border: 1px solid var(--line); border-radius: 4px; color: var(--cream-dim); font-size: .92rem; min-width: 0; }
+.check li::before { content: ''; position: absolute; left: 12px; top: 14px; width: 14px; height: 14px; border: 1.5px solid var(--gold); border-radius: 3px; }
+.check b { color: var(--gold-hi); font-weight: 500; display: block; }
+.fonts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.font { display: grid; gap: 4px; padding: 14px 16px; background: var(--olive); border: 1px solid var(--line); border-radius: 4px; text-decoration: none; color: var(--cream); min-width: 0; transition: border-color .2s; }
+.font:hover { border-color: var(--gold); }
+.font .role { font-size: .78rem; color: var(--gold); }
+.font .sample { font-size: 1.35rem; line-height: 2; overflow-wrap: anywhere; }
+.font .sample.big { font-size: 1.9rem; line-height: 1.8; }
+.font .name { font: 12.5px var(--f-mono); color: var(--cream-dim); }
+.alts { display: flex; flex-wrap: wrap; gap: 8px; }
+.alt { font-size: 1.25rem; line-height: 1.9; color: var(--gold-hi); background: var(--olive); border: 1px solid var(--line); border-radius: 4px; padding: 6px 14px; cursor: pointer; display: grid; justify-items: center; }
+.alt small { font: 11px var(--f-mono); color: var(--cream-dim); }
+.alt:hover { border-color: var(--gold); }
+.pal { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.preset { text-align: left; font: inherit; color: var(--cream); background: var(--olive); border: 1px solid var(--line); border-radius: 4px; padding: 10px; cursor: pointer; display: grid; gap: 4px; min-width: 0; }
+.preset:hover { border-color: var(--gold); }
+.preset .sw { display: grid; grid-template-columns: 1fr 1.4fr 1.4fr 1fr; height: 40px; border-radius: 3px; overflow: hidden; margin-bottom: 4px; box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
+.preset .sw i { display: block; }
+.preset b { font-weight: 500; font-size: .92rem; }
+.preset small { color: var(--cream-dim); font-size: .78rem; }
+.kit { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; padding: 16px; background: var(--olive); border: 1px solid var(--line); border-radius: 4px; align-items: center; }
+.kit-prev { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: center; justify-items: center; }
+.kit-prev img { width: 100%; max-width: 90px; height: auto; }
+.kit-prev img.wide { grid-column: 1 / -1; max-width: 260px; }
+.kit-prev .tex { grid-column: span 1; width: 100%; aspect-ratio: 1; border-radius: 3px; background-size: 200px; display: grid; place-items: end start; padding: 6px; font-size: .7rem; color: var(--cream); box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
+.kit-prev .tex:first-of-type { grid-column: 1 / span 2; aspect-ratio: auto; height: 70px; }
+.kit-txt { display: grid; gap: 10px; justify-items: start; min-width: 0; }
+.kit-txt p { margin: 0; }
+.kit .btn { text-decoration: none; display: inline-block; }
+@media (max-width: 640px) { .kit { grid-template-columns: 1fr; } }
 footer { text-align: center; color: var(--cream-dim); font-size: .85rem; }
 .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); translate: -50% 12px; opacity: 0; background: var(--cream); color: var(--olive-deep); padding: 8px 16px; border-radius: 999px; font-size: .9rem; transition: all .3s; pointer-events: none; }
 .toast.show { opacity: 1; translate: -50% 0; }
@@ -128,11 +163,71 @@ footer { text-align: center; color: var(--cream-dim); font-size: .85rem; }
     <ol class="steps">
       <li><b>ចម្លង Prompt</b><br>ចុចប៊ូតុង «ចម្លង Prompt» ខាងក្រោម។</li>
       <li><b>បំពេញ [ ]</b><br>ប្តូរពាក្យក្នុងសញ្ញា [ ] ជាឈ្មោះ កាលបរិច្ឆេទ ទីតាំង និងព័ត៌មានពិតរបស់អ្នក។</li>
-      <li><b>ភ្ជាប់រូបភាព</b><br>រូបធៀបការដែលបានបោះពុម្ព រូបថតមុនរៀបការ និង QR ចំណងដៃ (បើមាន)។</li>
+      <li><b>ភ្ជាប់រូបភាព</b><br>រូបធៀបការដែលបានបោះពុម្ព រូបថតមុនរៀបការ QR ចំណងដៃ (បើមាន) និង Starter Kit ខាងក្រោម។</li>
       <li><b>ផ្ញើទៅ Claude</b><br>បិទភ្ជាប់ក្នុង Claude (Cowork ឬ Claude Code) ហើយពិនិត្យរាល់ជំហាន។</li>
     </ol>
     <p class="note">ពណ៌ និងក្បាច់នឹងយកតាមធៀបការដែលអ្នកបានបោះពុម្ព ដូច្នេះធៀបនីមួយៗមានស្ទីលផ្ទាល់ខ្លួន។ សូមពិនិត្យអក្ខរាវិរុទ្ធខ្មែរ មុនផ្ញើទៅភ្ញៀវ។</p>
     <p class="honest">Prompt នេះផ្តល់លទ្ធផលដំបូងល្អ ប៉ុន្តែនឹងមិនដូច ១០០% ដោយគ្រាន់តែផ្ញើម្តងទេ។ គំរូពិតខាងលើ ត្រូវការការកែ ១០ ដងទៀត។ សូមពិនិត្យ ហើយប្រើ Prompt តាមក្រោយខាងក្រោម ដើម្បីកែបន្ត។</p>
+  </section>
+
+  <section aria-labelledby="a">
+    <h2 id="a">ធនធាន · Assets</h2>
+
+    <h3 class="h3">១. ត្រៀមមុនពេលចាប់ផ្តើម · Checklist</h3>
+    <ul class="check">
+      <li><b>ព័ត៌មានពិធី</b> ឈ្មោះកូនកំលោះ កូនក្រមុំ (ខ្មែរ + អង់គ្លេស) ឪពុកម្តាយទាំងសងខាង កាលបរិច្ឆេទ ថ្ងៃខែតាមចន្ទគតិ ម៉ោងកម្មវិធីនីមួយៗ</li>
+      <li><b>ទីតាំង</b> អាសយដ្ឋាន និង Google Maps pin (lat, lng)</li>
+      <li><b>រូបថតមុនរៀបការ</b> ១០–៤០ សន្លឹក (រូបបញ្ឈរ និងផ្តេក) គុណភាពល្អ</li>
+      <li><b>រូបធៀបការដែលបានបោះពុម្ព</b> ដើម្បីយកពណ៌ និងក្បាច់</li>
+      <li><b>QR ចំណងដៃ</b> KHQR / ABA (បើចង់ដាក់)</li>
+      <li><b>តន្ត្រី</b> ឯកសារ mp3 ដែលអ្នកមានសិទ្ធិប្រើ (មិនចាំបាច់)</li>
+      <li><b>គណនី</b> GitHub និង Vercel (ឥតគិតថ្លៃ) សម្រាប់ដាក់វេបសាយឲ្យដំណើរការ</li>
+    </ul>
+
+    <h3 class="h3">២. ពុម្ពអក្សរ · Fonts <small>ឥតគិតថ្លៃ · Google Fonts · Claude ដាក់ឲ្យដោយស្វ័យប្រវត្តិ</small></h3>
+    <div class="fonts">
+      <a class="font" href="https://fonts.google.com/specimen/Moul" target="_blank" rel="noopener"><span class="role">ចំណងជើង · Headings</span><span class="sample" style="font-family:'Moul'">សិរីសួស្តីអាពាហ៍ពិពាហ៍</span><span class="name">Moul</span></a>
+      <a class="font" href="https://fonts.google.com/specimen/Moulpali" target="_blank" rel="noopener"><span class="role">ឡូហ្គោឈ្មោះ · Name logo</span><span class="sample big" style="font-family:'Moulpali'">រស្មី ♥ ភក្ដី</span><span class="name">Moulpali</span></a>
+      <a class="font" href="https://fonts.google.com/specimen/Kantumruy+Pro" target="_blank" rel="noopener"><span class="role">អត្ថបទ · Body</span><span class="sample" style="font-family:'Kantumruy Pro'">សូមគោរពអញ្ជើញចូលរួមពិធីអាពាហ៍ពិពាហ៍</span><span class="name">Kantumruy Pro</span></a>
+      <a class="font" href="https://fonts.google.com/specimen/Pinyon+Script" target="_blank" rel="noopener"><span class="role">English script</span><span class="sample big" style="font-family:'Pinyon Script'">The Wedding Invitation</span><span class="name">Pinyon Script + Cormorant Garamond</span></a>
+    </div>
+    <p class="note">ចង់ប្តូរ? ជម្រើសផ្សេងទៀតសម្រាប់ឡូហ្គោឈ្មោះ ឬចំណងជើង (ចុចដើម្បីចម្លងឈ្មោះ)៖</p>
+    <div class="alts">
+      <button type="button" class="alt" data-copy="Dangrek" style="font-family:'Dangrek'">រស្មី ♥ ភក្ដី<small>Dangrek</small></button>
+      <button type="button" class="alt" data-copy="Koulen" style="font-family:'Koulen'">រស្មី ♥ ភក្ដី<small>Koulen</small></button>
+      <button type="button" class="alt" data-copy="Battambang" style="font-family:'Battambang';font-weight:700">រស្មី ♥ ភក្ដី<small>Battambang</small></button>
+      <button type="button" class="alt" data-copy="Fasthand" style="font-family:'Fasthand'">រស្មី ♥ ភក្ដី<small>Fasthand</small></button>
+      <button type="button" class="alt" data-copy="Preahvihear" style="font-family:'Preahvihear'">រស្មី ♥ ភក្ដី<small>Preahvihear</small></button>
+      <button type="button" class="alt" data-copy="Noto Serif Khmer" style="font-family:'Noto Serif Khmer';font-weight:600">រស្មី ♥ ភក្ដី<small>Noto Serif Khmer</small></button>
+    </div>
+
+    <h3 class="h3">៣. ពណ៌ · Colour presets <small>ចុចដើម្បីចម្លង ហើយបិទភ្ជាប់ក្នុង Prompt</small></h3>
+    <div class="pal">
+      <button type="button" class="preset" data-copy="Palette Olive & Gold: paper #687437, deep #2a2f16, foil #9c7124 → #d9b15a → #fbefc0, cream #f2ecda, accent #c72c6a"><span class="sw"><i style="background:#2a2f16"></i><i style="background:#687437"></i><i style="background:linear-gradient(105deg,#9c7124,#d9b15a,#fbefc0,#d9b15a)"></i><i style="background:#f2ecda"></i></span><b>Olive &amp; Gold</b><small>បៃតងអូលីវ · មាស</small></button>
+      <button type="button" class="preset" data-copy="Palette Blush & Rose Gold: paper #e9cfc6, deep #4a2a2a, foil #a8695a → #e0a995 → #f8e1d6, cream #fbf5f0, accent #b2455e"><span class="sw"><i style="background:#4a2a2a"></i><i style="background:#e9cfc6"></i><i style="background:linear-gradient(105deg,#a8695a,#e0a995,#f8e1d6,#e0a995)"></i><i style="background:#fbf5f0"></i></span><b>Blush &amp; Rose Gold</b><small>ផ្កាឈូកស្រាល · មាសកុលាប</small></button>
+      <button type="button" class="preset" data-copy="Palette Navy & Silver: paper #233554, deep #111a2b, foil #8a8f96 → #d9dde2 → #ffffff, cream #f3f1ec, accent #c9a24a"><span class="sw"><i style="background:#111a2b"></i><i style="background:#233554"></i><i style="background:linear-gradient(105deg,#8a8f96,#d9dde2,#ffffff,#d9dde2)"></i><i style="background:#f3f1ec"></i></span><b>Navy &amp; Silver</b><small>ខៀវចាស់ · ប្រាក់</small></button>
+      <button type="button" class="preset" data-copy="Palette Maroon & Gold: paper #6e1f27, deep #2b0b10, foil #9c7124 → #d9b15a → #fbefc0, cream #f6eedd, accent #e7c46b"><span class="sw"><i style="background:#2b0b10"></i><i style="background:#6e1f27"></i><i style="background:linear-gradient(105deg,#9c7124,#d9b15a,#fbefc0,#d9b15a)"></i><i style="background:#f6eedd"></i></span><b>Maroon &amp; Gold</b><small>ក្រហមទុំ · មាស</small></button>
+      <button type="button" class="preset" data-copy="Palette Ivory & Champagne: paper #efe6d2, deep #3b3326, foil #a38b5b → #d8c49a → #f7efdc, cream #fffaf0, accent #7c8b6a"><span class="sw"><i style="background:#3b3326"></i><i style="background:#efe6d2"></i><i style="background:linear-gradient(105deg,#a38b5b,#d8c49a,#f7efdc,#d8c49a)"></i><i style="background:#fffaf0"></i></span><b>Ivory &amp; Champagne</b><small>ស · ស្រាសំប៉ាញ</small></button>
+    </div>
+
+    <h3 class="h3">៤. កញ្ចប់ធនធាន · Starter kit</h3>
+    <div class="kit">
+      <div class="kit-prev">
+        <img src="kit/ornaments/kbach-crest.svg" alt="Kbach crest">
+        <img src="kit/ornaments/wax-seal.svg" alt="Wax seal">
+        <img src="kit/ornaments/kbach-corner.svg" alt="Kbach corner">
+        <img src="kit/ornaments/butterfly.svg" alt="Butterfly">
+        <img src="kit/ornaments/kbach-divider.svg" alt="Divider" class="wide">
+        <span class="tex" style="background-image:url(kit/textures/paper-olive.webp)">ក្រដាសស្រោម</span>
+        <span class="tex" style="background-image:url(kit/textures/paper-cream.webp);color:#4f5a26">ក្រដាសកាត</span>
+        <span class="tex" style="background-image:url(kit/textures/paper-lining.webp);color:#4f5a26">ក្រដាសស្រទាប់</span>
+      </div>
+      <div class="kit-txt">
+        <p>ក្បាច់ខ្មែរ ត្រា​ក្រមួន មេអំបៅ និងវាយនភាពក្រដាស ដែលប្រើក្នុងគំរូពិត។ ភ្ជាប់ឯកសារ zip នេះជាមួយ Prompt ដើម្បីឲ្យលទ្ធផលកាន់តែស្អាត និងដូចគំរូ។</p>
+        <p class="note">SVG ៦ · Texture ៣ · ឥតគិតថ្លៃសម្រាប់មង្គលការផ្ទាល់ខ្លួន · សូមរក្សាការផ្តល់កិត្តិយស</p>
+        <a class="btn" href="kit/khmer-invite-starter-kit.zip" download>ទាញយក Starter Kit (.zip · 170 KB)</a>
+      </div>
+    </div>
   </section>
 
   <section aria-labelledby="p">
@@ -153,12 +248,14 @@ footer { text-align: center; color: var(--cream-dim); font-size: .85rem; }
 - Pre-wedding photos: <span class="fill">[attach or give the folder]</span>
 - Printed card photo: <span class="fill">[attach]</span>. Take the colour palette and ornament style from it (e.g. olive + gold foil, cream + rose gold, navy + silver).
 - Music (optional): <span class="fill">[attach an mp3 you have the rights to]</span>
+- Starter kit (optional, recommended): <span class="fill">[attach khmer-invite-starter-kit.zip]</span>. If attached, use its kbach SVGs, wax seal, butterfly and paper textures instead of drawing your own; recolour the "g-foil" gradient and textures to match our card.
+- Colour palette (optional): <span class="fill">[paste a preset from the page, or say "take it from my card"]</span>
 
 <span class="h">STYLE</span>
 - Colours come from our printed card: one main paper colour, a metallic foil (a gradient with a highlight, never flat yellow), cream, and a near-black for photo sections.
 - Materials must look real, not cartoon: generate tileable paper textures (fine grain + faint fibres, very low contrast, no cloudy blotches) for the envelope paper, the cream card and the flap lining. Use soft layered shadows and debossed ornaments.
 - Ornaments: draw your own Khmer kbach (ក្បាច់ភ្ញីភ្លើង flame-leaf, lotus fan crest, snail curls) as SVG for corners, dividers and a crest. No stock clipart, no Thai motifs, no cartoon Angkor drawings.
-- Fonts (Google Fonts / @fontsource): Moul for ceremonial headings, Moulpali for the couple's name logo, Kantumruy Pro for body, Cormorant Garamond + Pinyon Script for English.
+- Fonts (Google Fonts / @fontsource): Moul for ceremonial headings, Moulpali for the couple's name logo, Kantumruy Pro for body, Cormorant Garamond + Pinyon Script for English. <span class="fill">[or my choice: …]</span>
 - Name logo (ឡូហ្គោឈ្មោះ): groom's short name top-left and bride's bottom-right in Moulpali gold foil, joined by a flourish line, a small heart and a butterfly, under a small kbach crest. Reuse it on the envelope flap, the inner card, the cover, the top bar and the thank-you section. Animate it: names reveal left to right, flourish draws, heart pops, butterfly flies in.
 
 <span class="h">KHMER TEXT RULES (very important)</span>
@@ -257,7 +354,7 @@ function copyText(text, el) {
 }
 document.getElementById('copy').addEventListener('click', () => { const p = document.getElementById('prompt'); copyText(p.innerText, p); });
 document.querySelectorAll('.fu-item').forEach((b) => b.addEventListener('click', () => { const sp = b.querySelector('span'); copyText(sp.innerText, sp); }));
-document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => copyText(b.dataset.copy, b.previousElementSibling)));
+document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => copyText(b.dataset.copy, b.previousElementSibling || b)));
 </script>
 
 </body>
