@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Prompt សម្រាប់បង្កើតវេបសាយធៀបការឌីជីថល ស្ទីលខ្មែរ ជាមួយ Claude · by Someth Phay">
+<meta property="og:title" content="ធៀបការឌីជីថល · Khmer E-Invitation Prompt">
+<meta property="og:description" content="ចម្លង Prompt បំពេញព័ត៌មាន ហើយបង្កើតធៀបការឌីជីថលផ្ទាល់ខ្លួនជាមួយ Claude · by Someth Phay">
+<meta property="og:image" content="https://raksmey-pheakdey.vercel.app/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1f2311">
+<title>Khmer E-Invitation Prompt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single centred "card on a table" column — header like the front of a ធៀប, then steps, the prompt as the card's insert, credit as the back flap. */
+:root {
+  color-scheme: dark;
+  --olive-deep: #1f2311;
+  --olive: #2f3518;
+  --olive-panel: #394020;
+  --line: rgba(217,177,90,.28);
+  --gold: #d9b15a;
+  --gold-hi: #f4e2a8;
+  --cream: #f1ead6;
+  --cream-dim: #c9c2ab;
+  --code-bg: #171a0c;
+  --f-moul: 'Moul', 'Kantumruy Pro', serif;
+  --f-kh: 'Kantumruy Pro', system-ui, sans-serif;
+  --f-serif: 'Cormorant Garamond', Georgia, serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+body { background: var(--olive-deep); color: var(--cream); font-family: var(--f-kh); font-size: 16px; line-height: 1.75; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 18px; padding-block: 40px 56px; display: grid; gap: 40px; }
+.foil { background: linear-gradient(105deg, #9c7124 0%, #d9b15a 25%, #fbefc0 45%, #d9b15a 60%, #9c7124 85%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-block: .25em .12em; }
+a { color: var(--gold-hi); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
+
+/* header */
+header { text-align: center; padding: 36px 18px 30px; border: 1px solid var(--line); border-radius: 4px; background:
+  radial-gradient(120% 90% at 50% 0%, rgba(217,177,90,.10), transparent 60%), var(--olive); position: relative; }
+header::before { content: ''; position: absolute; inset: 7px; border: 1px solid rgba(217,177,90,.16); border-radius: 2px; pointer-events: none; }
+.crest { width: 74px; height: auto; margin: 0 auto 6px; display: block; }
+.kicker { font-family: var(--f-moul); font-size: clamp(1.15rem, 4.2vw, 1.6rem); line-height: 2.1; margin: 0; }
+.sub { font-family: var(--f-serif); font-style: italic; color: var(--gold); font-size: 1.25rem; margin: -4px 0 14px; }
+header h1 { font-family: var(--f-kh); font-weight: 600; font-size: clamp(1.25rem, 4vw, 1.7rem); line-height: 1.6; margin: 0; text-wrap: balance; }
+header p.lead { color: var(--cream-dim); max-width: 36em; margin: 10px auto 0; }
+.demo { margin-top: 18px; display: inline-flex; gap: 8px; align-items: center; font-size: .95rem; }
+
+/* section heads */
+h2 { font-family: var(--f-moul); font-weight: 400; color: var(--gold); font-size: 1.05rem; line-height: 2; margin: 0 0 10px; display: flex; align-items: center; gap: 12px; }
+h2::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; counter-reset: s; }
+.steps li { counter-increment: s; padding: 14px 16px; border: 1px solid var(--line); border-radius: 4px; background: var(--olive); min-width: 0; }
+.steps li::before { content: counter(s, khmer); display: block; font-family: var(--f-moul); color: var(--gold); font-size: 1.1rem; line-height: 1.8; }
+.steps b { color: var(--gold-hi); font-weight: 500; }
+.note { color: var(--cream-dim); font-size: .92rem; margin: 12px 0 0; }
+
+/* prompt */
+.prompt-box { border: 1px solid var(--line); border-radius: 4px; background: var(--code-bg); overflow: hidden; }
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 12px 10px 16px; border-bottom: 1px solid var(--line); background: var(--olive); }
+.bar span { font-family: var(--f-mono); font-size: .8rem; color: var(--cream-dim); }
+.btn { font: 500 .95rem var(--f-kh); border: 1px solid var(--gold); background: var(--gold); color: var(--olive-deep); padding: 8px 18px; border-radius: 999px; cursor: pointer; transition: transform .2s, background .2s; }
+.btn:hover { background: var(--gold-hi); transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--gold-hi); }
+pre { margin: 0; padding: 18px 16px; max-height: 560px; overflow: auto; white-space: pre-wrap; word-break: break-word; font: 13.5px/1.7 var(--f-mono); color: var(--cream); }
+pre .fill { color: var(--gold-hi); background: rgba(217,177,90,.14); border-radius: 3px; padding: 0 3px; }
+pre .h { color: var(--gold); font-weight: 500; }
+
+/* credit */
+.credit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px; padding: 22px; border: 1px solid var(--line); border-radius: 4px; background: var(--olive-panel); align-items: center; }
+.credit .who { min-width: 0; }
+.credit .made { font-family: var(--f-serif); font-style: italic; color: var(--gold); font-size: 1.1rem; margin: 0; }
+.credit .name { font-family: var(--f-moul); font-size: 1.5rem; line-height: 2; margin: 2px 0 0; }
+.credit .en { font-family: var(--f-serif); font-size: 1.35rem; margin: -6px 0 8px; }
+.credit p { margin: 0; color: var(--cream-dim); font-size: .95rem; }
+.links { display: grid; gap: 8px; min-width: 0; }
+.links a, .links .row { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--cream); background: rgba(0,0,0,.14); min-width: 0; }
+.links a:hover { border-color: var(--gold); }
+.links i { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-style: normal; }
+.links i svg { width: 16px; height: 16px; fill: currentColor; }
+.links small { display: block; color: var(--cream-dim); font-size: .75rem; line-height: 1.3; }
+.links span { min-width: 0; overflow-wrap: anywhere; line-height: 1.35; }
+.links .row button { margin-left: auto; padding: 4px 12px; font-size: .8rem; }
+.i-web { background: #6b7536; } .i-tg { background: #26A5E4; } .i-fb { background: #0866FF; } .i-ig { background: linear-gradient(45deg,#f9a825,#e1306c,#833ab4); } .i-ph { background: #9c7124; }
+.fu { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.fu-item { text-align: left; font: inherit; color: var(--cream); background: var(--olive); border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; cursor: pointer; display: grid; gap: 4px; min-width: 0; transition: border-color .2s; }
+.fu-item:hover { border-color: var(--gold); }
+.fu-item b { color: var(--gold-hi); font-weight: 500; }
+.fu-item span { font: 12.5px/1.6 var(--f-mono); color: var(--cream-dim); overflow-wrap: anywhere; }
+.fu-item::after { content: 'ចុចដើម្បីចម្លង'; font-size: .75rem; color: var(--gold); }
+.honest { padding: 14px 16px; border-left: 2px solid var(--gold); background: var(--olive); color: var(--cream-dim); font-size: .95rem; margin-top: 14px; }
+footer { text-align: center; color: var(--cream-dim); font-size: .85rem; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); translate: -50% 12px; opacity: 0; background: var(--cream); color: var(--olive-deep); padding: 8px 16px; border-radius: 999px; font-size: .9rem; transition: all .3s; pointer-events: none; }
+.toast.show { opacity: 1; translate: -50% 0; }
+@media (max-width: 640px) { .credit { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+
+<style>html,body{margin:0} *,*::before,*::after{box-sizing:border-box}</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <svg class="crest" viewBox="-110 -135 220 150" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2=".35"><stop offset="0" stop-color="#9c7124"/><stop offset=".45" stop-color="#fbefc0"/><stop offset="1" stop-color="#d9b15a"/></linearGradient></defs>
+      <g fill="url(#g)">
+        <path d="M0 -14 C-12 -34 -17 -59 -7 -81 C0 -99 15 -110 26 -120 C34 -126 44 -122 42 -112 C41 -105 33 -105 33 -111 C26 -102 17 -94 19 -81 C20 -66 30 -61 29 -48 C27 -31 15 -21 0 -14 Z"/>
+        <path transform="translate(-12 -12) rotate(-30) scale(.9)" d="M0 0 C-10 -16 -14 -36 -6 -54 C0 -68 12 -77 21 -85 C27 -90 35 -87 34 -79 C33 -73 26 -73 26 -78 C21 -71 14 -64 15 -54 C16 -42 24 -38 23 -27 C22 -14 12 -6 0 0 Z"/>
+        <path transform="translate(12 -12) rotate(30) scale(-.9 .9)" d="M0 0 C-10 -16 -14 -36 -6 -54 C0 -68 12 -77 21 -85 C27 -90 35 -87 34 -79 C33 -73 26 -73 26 -78 C21 -71 14 -64 15 -54 C16 -42 24 -38 23 -27 C22 -14 12 -6 0 0 Z"/>
+        <path transform="translate(-26 -6) rotate(-62) scale(.7)" d="M0 0 C-10 -16 -14 -36 -6 -54 C0 -68 12 -77 21 -85 C27 -90 35 -87 34 -79 C33 -73 26 -73 26 -78 C21 -71 14 -64 15 -54 C16 -42 24 -38 23 -27 C22 -14 12 -6 0 0 Z"/>
+        <path transform="translate(26 -6) rotate(62) scale(-.7 .7)" d="M0 0 C-10 -16 -14 -36 -6 -54 C0 -68 12 -77 21 -85 C27 -90 35 -87 34 -79 C33 -73 26 -73 26 -78 C21 -71 14 -64 15 -54 C16 -42 24 -38 23 -27 C22 -14 12 -6 0 0 Z"/>
+      </g>
+      <path d="M-92 6 C-60 10 -30 -2 0 -2 C30 -2 60 10 92 6" fill="none" stroke="url(#g)" stroke-width="2"/>
+    </svg>
+    <p class="kicker foil">ធៀបការឌីជីថល</p>
+    <p class="sub">The Khmer Wedding E-Invitation Prompt</p>
+    <h1>Prompt សម្រាប់បង្កើតវេបសាយធៀបការ ស្ទីលខ្មែរ បែបទំនើប</h1>
+    <p class="lead">ចម្លង Prompt ខាងក្រោម បំពេញព័ត៌មានរបស់អ្នក ហើយផ្ញើទៅ Claude ដើម្បីបង្កើតធៀបការឌីជីថល ដែលមានស្រោមសំបុត្របើកបាន ចលនាស្អាត និងក្បាច់ខ្មែរ។</p>
+    <div class="demo">មើលគំរូពិត៖ <a href="https://raksmey-pheakdey.vercel.app" target="_blank" rel="noopener">raksmey-pheakdey.vercel.app</a></div>
+  </header>
+
+  <section aria-labelledby="how">
+    <h2 id="how">របៀបប្រើ</h2>
+    <ol class="steps">
+      <li><b>ចម្លង Prompt</b><br>ចុចប៊ូតុង «ចម្លង Prompt» ខាងក្រោម។</li>
+      <li><b>បំពេញ [ ]</b><br>ប្តូរពាក្យក្នុងសញ្ញា [ ] ជាឈ្មោះ កាលបរិច្ឆេទ ទីតាំង និងព័ត៌មានពិតរបស់អ្នក។</li>
+      <li><b>ភ្ជាប់រូបភាព</b><br>រូបធៀបការដែលបានបោះពុម្ព រូបថតមុនរៀបការ និង QR ចំណងដៃ (បើមាន)។</li>
+      <li><b>ផ្ញើទៅ Claude</b><br>បិទភ្ជាប់ក្នុង Claude (Cowork ឬ Claude Code) ហើយពិនិត្យរាល់ជំហាន។</li>
+    </ol>
+    <p class="note">ពណ៌ និងក្បាច់នឹងយកតាមធៀបការដែលអ្នកបានបោះពុម្ព ដូច្នេះធៀបនីមួយៗមានស្ទីលផ្ទាល់ខ្លួន។ សូមពិនិត្យអក្ខរាវិរុទ្ធខ្មែរ មុនផ្ញើទៅភ្ញៀវ។</p>
+    <p class="honest">Prompt នេះផ្តល់លទ្ធផលដំបូងល្អ ប៉ុន្តែនឹងមិនដូច ១០០% ដោយគ្រាន់តែផ្ញើម្តងទេ។ គំរូពិតខាងលើ ត្រូវការការកែ ១០ ដងទៀត។ សូមពិនិត្យ ហើយប្រើ Prompt តាមក្រោយខាងក្រោម ដើម្បីកែបន្ត។</p>
+  </section>
+
+  <section aria-labelledby="p">
+    <h2 id="p">Prompt</h2>
+    <div class="prompt-box">
+      <div class="bar"><span>English prompt · fill the [ ] parts</span><button class="btn" id="copy" type="button">ចម្លង Prompt</button></div>
+<pre id="prompt"><span class="h">You are a senior creative developer and motion designer.</span> Build a production-ready Khmer wedding e-invitation website (ធៀបការឌីជីថល) that guests open from a shared link, mostly inside Telegram or Messenger on phones. It must feel like the digital twin of our printed card: heritage Khmer craft with modern, cinematic motion, never a generic "AI template". Reference of the finished quality: https://raksmey-pheakdey.vercel.app (study how it looks and moves; do not copy its names or photos).
+
+<span class="h">OUR DETAILS</span> (ពាក្យក្នុង [ ] សូមប្តូរជាព័ត៌មានរបស់អ្នក)
+- Groom / កូនកំលោះ: <span class="fill">[ឈ្មោះខ្មែរ]</span> / <span class="fill">[English name]</span>
+- Bride / កូនក្រមុំ: <span class="fill">[ឈ្មោះខ្មែរ]</span> / <span class="fill">[English name]</span>
+- Groom's parents: លោក <span class="fill">[ ]</span> និងលោកស្រី <span class="fill">[ ]</span>
+- Bride's parents: លោក <span class="fill">[ ]</span> និងលោកស្រី <span class="fill">[ ]</span>
+- Date: <span class="fill">[ថ្ងៃ ទី ខែ ឆ្នាំ]</span> + Khmer lunar date: <span class="fill">[ត្រូវនឹង…]</span>
+- Ceremony programme with times: <span class="fill">[ហែជំនូន 06:30, …]</span>
+- Venue: <span class="fill">[address]</span> · Google Maps pin: <span class="fill">[lat, lng]</span>
+- Gift QR codes (optional): <span class="fill">[attach KHQR / ABA images]</span>
+- Pre-wedding photos: <span class="fill">[attach or give the folder]</span>
+- Printed card photo: <span class="fill">[attach]</span>. Take the colour palette and ornament style from it (e.g. olive + gold foil, cream + rose gold, navy + silver).
+- Music (optional): <span class="fill">[attach an mp3 you have the rights to]</span>
+
+<span class="h">STYLE</span>
+- Colours come from our printed card: one main paper colour, a metallic foil (a gradient with a highlight, never flat yellow), cream, and a near-black for photo sections.
+- Materials must look real, not cartoon: generate tileable paper textures (fine grain + faint fibres, very low contrast, no cloudy blotches) for the envelope paper, the cream card and the flap lining. Use soft layered shadows and debossed ornaments.
+- Ornaments: draw your own Khmer kbach (ក្បាច់ភ្ញីភ្លើង flame-leaf, lotus fan crest, snail curls) as SVG for corners, dividers and a crest. No stock clipart, no Thai motifs, no cartoon Angkor drawings.
+- Fonts (Google Fonts / @fontsource): Moul for ceremonial headings, Moulpali for the couple's name logo, Kantumruy Pro for body, Cormorant Garamond + Pinyon Script for English.
+- Name logo (ឡូហ្គោឈ្មោះ): groom's short name top-left and bride's bottom-right in Moulpali gold foil, joined by a flourish line, a small heart and a butterfly, under a small kbach crest. Reuse it on the envelope flap, the inner card, the cover, the top bar and the thank-you section. Animate it: names reveal left to right, flourish draws, heart pops, butterfly flies in.
+
+<span class="h">KHMER TEXT RULES (very important)</span>
+- Never render Khmer inside SVG &lt;text&gt;: vowel signs and subscripts land in the wrong place. Use HTML text layered over SVG ornaments.
+- background-clip:text (gold foil) only paints inside the box, so every foil Khmer element needs extra padding (about .3em top, .2em bottom) or the tops of ី ឹ and the subscripts get cut off.
+- Line-by-line reveal masks need padding top and bottom (about .4em) for the same reason.
+- clip-path reveals must use negative insets (e.g. inset(-40% 110% -40% -10%) → inset(-40% -10% -40% -10%)) and clear the clip-path afterwards.
+- Khmer line-height at least 1.8; no letter-spacing on Khmer; Khmer numerals in Khmer mode.
+- Parents written as "លោក X" on one line and "និងលោកស្រី Y" on the next.
+
+<span class="h">EXPERIENCE (in order)</span>
+1. Envelope screen: a dark, blurred couple photo as background; above it "សិរីសួស្តីអាពាហ៍ពិពាហ៍ / The Wedding Invitation". A large realistic envelope (about 88% of phone width): back panel, the card inside, a front pocket made of left/right/bottom folded panels with soft edge shadows, a scalloped flap (clip-path) with the name logo and a gold scalloped line, a cream lining on the flap's back, and a shadow the closed flap casts on the pocket. A gold wax seal with an uneven poured edge, lit with SVG specular lighting, the crest pressed into it. Gentle idle float and tilt with pointer/phone tilt.
+   Opening (about 5.5 s, slow, "by hand"): seal pressed → lifted with growing shadow → set aside off screen; flap folds back 180° in 3D, its shadow lifting; card drawn out of the pocket at a slight angle while the envelope moves down a little; envelope dropped out of frame; card comes to the camera; fade through dark into the cover. Music starts on this tap.
+   3D notes: keep transform-style: preserve-3d on the stage and never put a CSS filter on a 3D parent (it flattens it). Layer order: back &lt; card &lt; pocket front &lt; flap; once the flap passes 90° put it behind the card.
+2. Cover (merged with the hero, not a separate duplicate): full-screen darkened couple photo (optionally a subtle WebGL water/candle-flicker effect on desktop) with corner kbach, crest, សិរីសួស្តីអាពាហ៍ពិពាហ៍, the name logo, English names, សូមគោរពអញ្ជើញ, a ថ្ងៃ | ទី | ខែ | ឆ្នាំ date row, the lunar date, venue, and "scroll" cue. Everything must fit one screen on desktop.
+3. Formal invitation words (…ដើម្បីប្រសិទ្ធពរជ័យសិរីសួស្តីមង្គល…) with an arched photo and both sets of parents (headings មាតាបិតាកូនកំលោះ / មាតាបិតាកូនក្រមុំ).
+4. The couple: scalloped photo frame, groom and bride names and parents.
+5. Countdown in Khmer numerals with a slow blessing marquee behind.
+6. Programme (heading only "កម្មវិធី"): a gold thread draws down as you scroll; each ritual's line icon draws and lights up.
+7. Love story: pinned sideways photo strip, background shifting from day to dusk, short poetic Khmer captions.
+8. Candlelight: full-screen photo, touching the water makes ripples and floats a small lotus lantern.
+9. Gallery: every photo in a masonry grid with a swipeable full-screen viewer.
+10. Venue: kbach crest, venue name, embedded Google Map (maps.google.com/maps?q=LAT,LNG&amp;output=embed), Open Google Maps + Save to Calendar (.ics) buttons.
+11. Wedding gift (ចំណងដៃ): QR images always visible (no toggle), with a Save QR button.
+12. Thank you: candles light up one by one, "សូមអរគុណ", share buttons with each platform's logo and a short line (ផ្ញើតាម Telegram / Messenger / Facebook / ចម្លងតំណភ្ជាប់), and the name logo.
+Throughout: Khmer/English switch (Khmer first), music toggle, small name logo top-left, a dark gradient behind the top bar once scrolled so text never sits under the buttons. No RSVP form and no guest data collection unless I ask.
+
+<span class="h">MOTION</span>
+- GSAP (ScrollTrigger, DrawSVG, MotionPath, CustomEase) + Lenis on desktop. Silky easing, one signature moment per section, never the same fade-up everywhere.
+- Mirror corner ornaments inside the SVG (transform on an inner &lt;g&gt;), never with CSS transform, or GSAP will undo the flip.
+- Canvases (WebGL water, embers) must size to their parent, check visibility each frame, and never resize themselves in a loop. Only start WebGL after the envelope opens; skip it on phones.
+- Keep shimmer animations to the few big gold elements; too many continuous animations make phones lag.
+- Respect prefers-reduced-motion; detect weak devices and use a lighter version.
+
+<span class="h">TECHNICAL</span>
+- Vite static site. All wedding details in one data file (src/data/wedding.js) and all text in one i18n file (Khmer + English).
+- Script to convert photos to WebP (640/1280/2000 px), strip GPS/EXIF, and build the gallery list.
+- Link preview (og:image 1200×630 with absolute URL) showing the couple and names, Khmer og:title.
+- Responsive from a 320px phone to desktop, including sideways phones (use svh units, clamp(), container query units for the logo). No sideways scrolling anywhere.
+- Footer credit: "Design inspired by Someth Phay · somethphay.me" linking to https://somethphay.me
+
+<span class="h">QUALITY CHECK (do this before showing me)</span>
+- Playwright screenshots of every section at 320×568, 390×844, 740×360 and 1280×800; open the envelope and capture the opening as a sequence of frames; look at them yourself.
+- Check: no console errors, no element wider than the screen, no clipped Khmer marks, canvases fill their sections, nothing overlaps the top bar, the cover fits one screen.
+- Fix everything you find, then show me screenshots.
+
+<span class="h">PROCESS</span>
+1. Show me the envelope, its opening and the cover first for approval, then build the rest.
+2. Ask me for any missing detail; never invent names, dates or times.
+3. When done, push to a private GitHub repo and deploy on Vercel (ask me to sign in where needed), then give me the live link.</pre>
+    </div>
+  </section>
+
+  <section aria-labelledby="f">
+    <h2 id="f">Prompt តាមក្រោយ · Follow-ups</h2>
+    <p class="note" style="margin:0 0 12px">បើលទ្ធផលមិនទាន់ល្អ ចុចចម្លង Prompt ខ្លីៗខាងក្រោម ហើយផ្ញើបន្ត ដោយភ្ជាប់រូប Screenshot។</p>
+    <div class="fu">
+      <button type="button" class="fu-item"><b>ស្រោមសំបុត្រមិនស្អាត</b><span>The envelope looks fake/cartoon. Rebuild it with real paper textures, folded pocket panels with edge shadows, a lit wax seal, a lined flap and a slow by-hand opening, as described in the prompt.</span></button>
+      <button type="button" class="fu-item"><b>អក្សរខ្មែរដាច់</b><span>Some Khmer letters are clipped (see screenshot). Check every gold/foil text, line mask and clip-path reveal, add padding so vowel signs and subscripts are never cut, and re-check all sections.</span></button>
+      <button type="button" class="fu-item"><b>ទូរសព្ទមិនត្រូវ</b><span>The layout breaks on small screens (see screenshot). Make every section fit 320px to desktop including sideways phones, with no sideways scrolling, then show me screenshots at 320, 390 and 740×360.</span></button>
+      <button type="button" class="fu-item"><b>ឡូហ្គោឈ្មោះ</b><span>Make the name logo feel more hand-lettered and natural, like printed Khmer wedding cards: calligraphic names, flourish, heart, butterfly and a small kbach crest, gold foil, with no clipping.</span></button>
+      <button type="button" class="fu-item"><b>ផ្ទៃខាងក្រោយ</b><span>Use our darkened couple photo as the background for the envelope screen and the cover instead of a flat colour, and keep the text readable.</span></button>
+      <button type="button" class="fu-item"><b>កែពាក្យ</b><span>Change these texts exactly (Khmer first, update English to match): [old → new, …]</span></button>
+      <button type="button" class="fu-item"><b>ដាក់ឲ្យដំណើរការ</b><span>Push the latest version to GitHub and deploy it on Vercel, then confirm the live site shows the change.</span></button>
+    </div>
+  </section>
+
+  <section aria-labelledby="c">
+    <h2 id="c">អ្នករចនា · Credit</h2>
+    <div class="credit">
+      <div class="who">
+        <p class="made">Designed &amp; prompted by</p>
+        <p class="name foil">ផៃ សុមេធ</p>
+        <p class="en">Someth Phay</p>
+        <p>ចង់បានធៀបការឌីជីថលផ្ទាល់ខ្លួន ឬមានសំណួរ? ទាក់ទងមកខ្ញុំបាន។</p>
+      </div>
+      <div class="links">
+        <a href="https://somethphay.me/" target="_blank" rel="noopener"><i class="i-web"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 6h-3a15.7 15.7 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8ZM12 4c.8 1.1 1.5 2.5 1.9 4h-3.8c.4-1.5 1.1-2.9 1.9-4ZM4.3 14a8 8 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4H4.3Zm.8 2h3a15.7 15.7 0 0 0 1.4 3.6A8 8 0 0 1 5.1 16Zm3-8h-3a8 8 0 0 1 4.4-3.6C8.9 5.5 8.4 6.7 8.1 8ZM12 20c-.8-1.1-1.5-2.5-1.9-4h3.8c-.4 1.5-1.1 2.9-1.9 4Zm2.3-6H9.7a14.6 14.6 0 0 1 0-4h4.6a14.6 14.6 0 0 1 0 4Zm.2 5.6c.6-1.1 1.1-2.3 1.4-3.6h3a8 8 0 0 1-4.4 3.6ZM16.3 14a16.5 16.5 0 0 0 0-4h3.4a8 8 0 0 1 0 4h-3.4Z"/></svg></i><span><small>Portfolio</small>somethphay.me</span></a>
+        <a href="https://t.me/SomethPhay" target="_blank" rel="noopener"><i class="i-tg"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.6 13.5 1.9 12c-1-.3-1-1 .2-1.5L20.6 3.4c.8-.3 1.6.2 1.3 1.2Z"/></svg></i><span><small>Telegram</small>@SomethPhay</span></a>
+        <a href="https://www.instagram.com/someth_phay/" target="_blank" rel="noopener"><i class="i-ig"><svg viewBox="0 0 24 24"><path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM21.1 8c-.1-1.6-.4-3-1.6-4.2C18.3 2.6 16.9 2.3 15.3 2.2 13.7 2.1 10.3 2.1 8.7 2.2 7.1 2.3 5.7 2.6 4.5 3.8 3.3 5 3 6.4 2.9 8c-.1 1.6-.1 6.4 0 8 .1 1.6.4 3 1.6 4.2 1.2 1.2 2.6 1.5 4.2 1.6 1.6.1 6.4.1 8 0 1.6-.1 3-.4 4.2-1.6 1.2-1.2 1.5-2.6 1.6-4.2.1-1.6.1-6.4 0-8Zm-2 9.7a3.3 3.3 0 0 1-1.8 1.8c-1.3.5-4.3.4-5.3.4s-4.1.1-5.3-.4a3.3 3.3 0 0 1-1.8-1.8c-.5-1.3-.4-4.3-.4-5.7s-.1-4.4.4-5.7a3.3 3.3 0 0 1 1.8-1.8c1.3-.5 4.3-.4 5.3-.4s4.1-.1 5.3.4a3.3 3.3 0 0 1 1.8 1.8c.5 1.3.4 4.3.4 5.7s.1 4.4-.4 5.7Z"/></svg></i><span><small>Instagram</small>@someth_phay</span></a>
+        <div class="row"><i class="i-fb"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v2.9h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12Z"/></svg></i><span><small>Facebook page</small>Someth - សុមេធ</span></div>
+        <div class="row"><i class="i-ph"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg></i><span><small>Phone</small>012 292 870</span><button class="btn ghost" type="button" data-copy="012292870">ចម្លង</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© Someth Phay · Prompt free to use for your own wedding. Please keep the credit when you share it.</footer>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const toast = (m) => { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(window.__t); window.__t = setTimeout(() => t.classList.remove('show'), 1800); };
+function copyText(text, el) {
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('សូមចុច Copy ពីលើអក្សរដែលបានជ្រើស'); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => toast('បានចម្លងរួចរាល់ ✓'), fallback); else fallback();
+}
+document.getElementById('copy').addEventListener('click', () => { const p = document.getElementById('prompt'); copyText(p.innerText, p); });
+document.querySelectorAll('.fu-item').forEach((b) => b.addEventListener('click', () => { const sp = b.querySelector('span'); copyText(sp.innerText, sp); }));
+document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => copyText(b.dataset.copy, b.previousElementSibling)));
+</script>
+
+</body>
+</html>
